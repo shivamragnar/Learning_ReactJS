@@ -1,14 +1,14 @@
 import React from 'react'
 
-import './Person.css'
+import styles from './Person.css'
 // we can pass args to the function by using 'props' as shown
 const person = (props) => {
     // also this {} we can include the javascript we want to execute.
     return(
-        <div className = 'Person' >
+        <div className = {styles.Person} >
             <h3 onClick={props.click}>%%% hii this is {props.name} and i am just {props.age} years old %%%</h3>
             <p>{props.children}</p> 
-            <input type='text' onChange={props.change} />
+            <input type='text' onChange={props.changed} />
         </div>
        
     )

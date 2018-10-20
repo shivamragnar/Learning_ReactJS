@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.css';
 
-import Person from './Person/Person'
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
@@ -53,65 +54,37 @@ class App extends Component {
 
   render() {
     console.log('render worked')
-
-    const style ={
-      backgroundColor : 'green',
-      color : 'white',
-      border : '2px solid black',
-      padding : '8px',
-      margin: 'auto 5px',
-    }
     // we can also render the person list conditionally as shown below
       let person =null
+      
       if (this.state.showPersons){
           
           person = (
               <div>
-                    {this.state.person.map((personElement,index) => {
-                      return <Person 
-                      click = {() => this.deleteNameHandler(index)}
-                      name={personElement.name}
-                      age = {personElement.age} 
-                      key = {personElement.id}
-                      change = {(event)=>this.changeNameHandler(event, personElement.id)}> 
-                      hi this is {personElement.name}'s child </Person>
-                      })
-                    }
+                 <Persons
+                      personArray = {this.state.person}
+                      delete = {this.deleteNameHandler}
+                      change = {this.changeNameHandler}> 
+                 </Persons>
               </div>
           )
           
-          style.backgroundColor = 'red'
-          
       }
 
-      let classes = []
-
-      if(this.state.person.length <= 2){
-          classes.push('red')
-      }
-      if(this.state.person.length <= 1){
-        classes.push('green')
-      }
+      
       
 
 
     return (
       
-      <div className="App">
-        <h2 className={classes.join(' ')}> Hii this is shivam's first React App :0</h2>
-        <button
-         onClick={this.switchNameHandler.bind(this, 'SharmaG Changed')}> 
-          Switch Names
-        </button>
-
-        <button
-          style = {style} 
-          onClick={this.toggleNamesList}>
-          Toggle Names List
-        </button>
-        
+      <div className={styles.App}>
+        <Cockpit
+        personArray = {this.state.person}
+        switchNameHandler = {this.switchNameHandler}
+        showPersons = {this.state.showPersons}
+        toggle = {this.toggleNamesList}/>
         {person}
-        </div>
+      </div>
         
     );
   } 
