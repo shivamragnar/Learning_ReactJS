@@ -1,16 +1,32 @@
-import React from 'react'
-
+import React, {Component} from 'react'
 import styles from './Person.css'
-// we can pass args to the function by using 'props' as shown
-const person = (props) => {
-    // also this {} we can include the javascript we want to execute.
-    return(
-        <div className = {styles.Person} >
-            <h3 onClick={props.click}>%%% hii this is {props.name} and i am just {props.age} years old %%%</h3>
-            <p>{props.children}</p> 
-            <input type='text' onChange={props.changed} />
-        </div>
-       
-    )
+
+class Person extends Component{
+
+    constructor (props){
+        super(props)
+        console.log('[Person.js] inside Constructor', props)
+      }
+  
+      componentWillMount(){
+        console.log('[Person.js] inside componentWillMount')
+      }
+      componentDidMount(){
+        console.log('[Person.js] inside componentDidMount')
+      }
+
+    render(){
+        console.log('[Person.js] inside render')
+        return (
+                <div className = {styles.Person} >
+                    <h3 onClick={this.props.click}>%%% hii this is {this.props.name} and i 
+                      am just {this.props.age} years old %%%
+                    </h3>
+                    <p>{this.props.children}</p> 
+                    <input type='text' onChange={this.props.changed} />
+                </div>
+        )
+    }
 }
-export default person
+
+export default Person
